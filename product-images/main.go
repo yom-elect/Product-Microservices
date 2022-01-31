@@ -7,12 +7,12 @@ import (
 	"os/signal"
 	"time"
 
-	"example.com/mod/product-images/files"
-	"example.com/mod/product-images/handlers"
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/nicholasjackson/env"
+	"github.com/yom-elect/Product_Api/product-images/files"
+	"github.com/yom-elect/Product_Api/product-images/handlers"
 )
 
 var bindAddress = env.String("BIND_ADDRESS", false, ":9091", "Bind address for the server")
