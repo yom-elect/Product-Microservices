@@ -11,8 +11,8 @@ import (
 	"github.com/gorilla/mux"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/nicholasjackson/env"
-	"github.com/yom-elect/Product_Api/product-images/files"
-	"github.com/yom-elect/Product_Api/product-images/handlers"
+	"product.com/product-microservice/product-images/files"
+	"product.com/product-microservice/product-images/handlers"
 )
 
 var bindAddress = env.String("BIND_ADDRESS", false, ":9091", "Bind address for the server")

@@ -1,4 +1,4 @@
-module github.com/yom-elect/Product_Api/product-images
+module product.com/product-microservice/product-images
 
 go 1.17
 
