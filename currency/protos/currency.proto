@@ -22,6 +22,7 @@ message RateResponse {
 service Currency {
     // GetRate returns the exchange rate for the two provided currency codes 
     rpc GetRate(RateRequest) returns (RateResponse);
+    rpc SubscribeRates(stream RateRequest) returns (stream RateResponse);
 }
 
 // Currencies is an enum which represents the allowed currencies for the API
