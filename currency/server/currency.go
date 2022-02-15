@@ -6,6 +6,8 @@ import (
 	"time"
 
 	"github.com/hashicorp/go-hclog"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"product.com/product-microservice/currency/data"
 	protos "product.com/product-microservice/currency/protos/currency"
 )
@@ -55,6 +57,22 @@ func (c *Currency) handleUpdates(){
 // for the two given currencies.
 func (c *Currency) GetRate(ctx context.Context, rr *protos.RateRequest) (*protos.RateResponse, error) {
 	c.log.Info("Handle request for GetRate", "base", rr.GetBase(), "dest", rr.GetDestination())
+
+	if rr.Destination == rr.Base {
+		grpcError := status.Newf(
+			codes.InvalidArgument,
+			"Base currency %s cannot be same as the destination currency",
+			rr.Base.String(),
+			rr.Destination.String(),
+		)
+
+		err , wde := grpcError.WithDetails(rr)
+		if wde != nil {
+			return nil, wde
+		}
+
+		return nil, err.Err()
+	}
 
 	rate, err := c.rates.GetRate(rr.GetBase().String(), rr.GetDestination().String())
 	if err != nil {
